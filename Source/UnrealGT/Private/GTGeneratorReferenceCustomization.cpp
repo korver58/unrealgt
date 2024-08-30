@@ -82,7 +82,12 @@ void FGTGeneratorReferenceCustomization::CustomizeChildren(
         FNotificationInfo Info(FText::Format(
             LOCTEXT("InvalidComponentReference", "Component Reference {0} is no longer valid."),
             FText::FromName(GetSelectedComponentName())));
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 2
+        // https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Editor/EditorStyle/FEditorStyle?application_version=5.2
+        Info.Image = FAppStyle::GetBrush(TEXT("MessageLog.Warning"));
+#else
         Info.Image = FEditorStyle::GetBrush(TEXT("MessageLog.Warning"));
+#endif
         Info.FadeInDuration = 0.1f;
         Info.FadeOutDuration = 0.5f;
         Info.ExpireDuration = 6.5f;
