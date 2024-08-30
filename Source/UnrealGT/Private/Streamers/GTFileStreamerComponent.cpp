@@ -22,7 +22,8 @@ void UGTFileStreamerComponent::OnDataReady(const TArray<uint8>& Data, const FDat
 {
     FString TimeString = TimeStamp.ToString(FGTFileUtilities::TimeFormat);
 
-    TMap<FString, FStringFormatArg> GlobalProperties{{TEXT("ID"), IDCounter},
+    const FString IDCounterStr = FString::Printf(TEXT("%06d"), IDCounter);
+    TMap<FString, FStringFormatArg> GlobalProperties{{TEXT("ID"), IDCounterStr},
                                                      {TEXT("Time"), TimeString}};
 
     IDCounter++;
